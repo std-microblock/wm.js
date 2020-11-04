@@ -84,7 +84,8 @@
 
 
         let btnNode = wm.toolFuncs.createEle(`<div class="buttons"></div>`)
-        let packupBtn = wm.toolFuncs.createEle(`<div class="button packup"><div class="iconUp"></div></div>`); packupBtn.onclick = wm.eventFuncs.btn.packup
+        let packupBtn = wm.toolFuncs.createEle(`<div class="button packup"><div class="iconUp"></div></div>`); 
+        packupBtn.onclick = (e)=>{wm.eventFuncs.btn.packup.call(this,e)}
         btnNode.appendChild(packupBtn);
 
 
