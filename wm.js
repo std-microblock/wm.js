@@ -11,9 +11,9 @@
           ele.innerHTML = html;
           return ele.firstChild
         },
-        setEventFn (dom, evts) {
+        setEventFn (dom, evts, _this) {
           for (let i in evts)
-            dom[i] = evts[i]
+            dom[i] = function(e){evts[i].call(_this,e)}
         },
         getTargetParent (e, r = 1) {
           e.currentTarget = e.currentTarget || e.target
@@ -28,7 +28,9 @@
               wm.toolFuncs.getTargetParent(e, 3).classList.remove("packedup")
             else
               wm.toolFuncs.getTargetParent(e, 3).classList.add("packedup")
-
+            this.onpackup.forEach((e)=>{
+              e.call(this,e);
+            })
           }
         },
         title: {
@@ -99,6 +101,13 @@
 
         this._overflow = "shown"
 
+        this.onpackup=[]
+        this.packup=(fn)=>{
+          this.onpackup.push(fn);
+        }
+
+
+
         Object.defineProperties(this,
           {
             "overflow": {
@@ -124,6 +133,22 @@
               },
               set (a) {
                 this.winNode.style.height = a + "px";
+              }
+            },
+            "left": {
+              get () {
+                return this.winNode.offsetLeft
+              },
+              set (a) {
+                this.winNode.style.left = a + "px";
+              }
+            },
+            "top": {
+              get () {
+                return this.winNode.offsetTop
+              },
+              set (a) {
+                this.winNode.style.top = a + "px";
               }
             }
           })
