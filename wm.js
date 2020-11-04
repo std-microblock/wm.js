@@ -28,8 +28,13 @@
               wm.toolFuncs.getTargetParent(e, 3).classList.remove("packedup")
             else
               wm.toolFuncs.getTargetParent(e, 3).classList.add("packedup")
-            this.onpackup.forEach((e)=>{
+            this._onpackup.forEach((e)=>{
+              try{
               e.call(this,e);
+              }
+              catch(e){
+                console.error("Failed calling callback function",e)
+              }
             })
           }
         },
@@ -102,11 +107,10 @@
 
         this._overflow = "shown"
 
-        this.onpackup=[]
-        this.packup=(fn)=>{
-          this.onpackup.push(fn);
+        this._onpackup=[]
+        this.onpackup=(fn)=>{
+          this._onpackup.push(fn);
         }
-
 
 
         Object.defineProperties(this,
@@ -118,6 +122,14 @@
               set (a) {
                 this._overflow = a;
                 this.contentNode.lastChild.style.overflow = a
+              }
+            },
+            "packup":{
+              get(){
+                return this.winNode.classList.contains("packedup")
+              },set(a){
+                if(a)this.winNode.classList.add("packedup")
+                else this.winNode.classList.remove("packedup")
               }
             },
             "width": {
