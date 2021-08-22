@@ -15,8 +15,8 @@ Example code
     <script>
      var win=new wm.window(),a=0
      function foo(){
-      let win=new wm.window("Wm.js is pretty good".split(" ")[a++]);
-      win.setContentNode(wm.toolFuncs.createEle(`<pre style="margin:15px;color:white;">Wm.js is pretty good!</pre>`))
+      let win=new wm.window("Wm.js is pretty shit".split(" ")[a++]);
+      win.setContentNode(wm.toolFuncs.createEle(`<pre style="margin:15px;color:white;">Wm.js is pretty shit!</pre>`))
      }
      win.setContentNode(wm.toolFuncs.createEle("<div onclick='foo()' style='border-radius:10px;user-select:none;color:white;box-shadow:0px 0px 10px black;padding:10px;margin:10px;background:#343434'>点我增加窗口</div>"))
 
